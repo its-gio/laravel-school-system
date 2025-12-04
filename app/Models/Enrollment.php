@@ -11,10 +11,10 @@ class Enrollment extends Model
 
     public $timestamps = false;
 
-    protected $primaryKey = 'enrollment_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'tenant_id',
+        'school_id',
         'student_id',
         'course_id',
         'enrollment_date'

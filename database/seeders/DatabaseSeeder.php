@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\School;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,12 +21,12 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'GDawg',
                 'password' => 'password',
-                'tenant_id' => 1,
+                'school_id' => 1,
                 'email_verified_at' => now(),
                 ]
             );
 
-        Tenant::firstOrCreate(
+        School::firstOrCreate(
             [
                 'school_name' => 'Roccia School',
                 'address' => '1234 Bolder Ave',

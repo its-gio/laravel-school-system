@@ -11,10 +11,10 @@ class Student extends Model
 
     public $timestamps = false;
 
-    protected $primaryKey = 'student_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'tenant_id',
+        'school_id',
         'first_name',
         'last_name',
         'grade'

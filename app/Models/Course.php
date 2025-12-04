@@ -11,10 +11,10 @@ class Course extends Model
 
     public $timestamps = false;
 
-    protected $primaryKey = 'course_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'tenant_id',
+        'school_id',
         'course_name',
         'teacher_id',
     ];

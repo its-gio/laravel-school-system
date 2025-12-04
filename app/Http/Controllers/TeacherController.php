@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 class TeacherController extends Controller
 {
     public function index() {
-        $tenantId = Auth::user()->tendant_id;
-        $teachers = Teacher::where('tenant_id', $tenantId)->get();
+        $schoolId = Auth::user()->tendant_id;
+        $teachers = Teacher::where('school_id', $schoolId)->get();
         return Inertia::render('teacher/index', [
-            'tenant_id' => $tenantId,
+            'school_id' => $schoolId,
             'teachers' => $teachers
         ]);
     }
@@ -26,7 +26,7 @@ class TeacherController extends Controller
             'subject' => 'required|string|max:50',
         ]);
 
-        $validated['tenant_id'] = Auth::user()->tenant_id;
+        $validated['school_id'] = Auth::user()->school_id;
         Teacher::create($validated);
         return Redirect::route('teachers.index');
     }
@@ -38,13 +38,13 @@ class TeacherController extends Controller
             'subject' => 'required|string|max:50',
         ]);
 
-        $teacher = Teacher::where('tenat_id', Auth::user()->tenant_id)->findOrFail($id);
+        $teacher = Teacher::where('school_id', Auth::user()->school_id)->findOrFail($id);
         $teacher->update($validated);
         return Redirect::route('teachers.index');
     }
     
     public function destroy($id) {
-        $teacher = Teacher::where('tenat_id', Auth::user()->tenant_id)->findOrFail($id);
+        $teacher = Teacher::where('school_id', Auth::user()->school_id)->findOrFail($id);
         $teacher->delete();
         return Redirect::route('teachers.idex');
     }
