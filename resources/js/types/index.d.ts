@@ -41,3 +41,11 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Teacher {
+    teacher_id: number;
+    school_id: number;
+    first_name: string;
+    last_name: string;
+    subject: string;
+}
