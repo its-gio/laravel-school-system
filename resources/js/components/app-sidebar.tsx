@@ -15,9 +15,8 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
     Apple,
-    BookOpen,
     CalendarCheck,
-    Folder,
+    GitCompareArrows,
     GraduationCap,
     LayoutGrid,
     NotebookText,
@@ -31,7 +30,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Teacher',
+        title: 'Teachers',
         href: '/teachers',
         icon: Apple,
     },
@@ -55,14 +54,14 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        href: 'https://github.com/its-gio/laravel-school-system',
+        icon: GitCompareArrows,
     },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
+    // {
+    //     title: 'Documentation',
+    //     href: 'https://laravel.com/docs/starter-kits#react',
+    //     icon: BookOpen,
+    // },
 ];
 
 export function AppSidebar() {
