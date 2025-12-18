@@ -43,7 +43,7 @@ export interface User {
 }
 
 export interface Teacher {
-    teacher_id: number;
+    id: number;
     school_id: number;
     first_name: string;
     last_name: string;
