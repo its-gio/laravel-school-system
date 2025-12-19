@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 class TeacherController extends Controller
 {
     public function index() {
-        $schoolId = Auth::user()->tendant_id;
+        $schoolId = Auth::user()->school_id;
         $teachers = Teacher::where('school_id', $schoolId)->get();
         return Inertia::render('teacher/index', [
             'school_id' => $schoolId,
@@ -28,7 +28,7 @@ class TeacherController extends Controller
 
         $validated['school_id'] = Auth::user()->school_id;
         Teacher::create($validated);
-        return Redirect::route('teachers.index');
+        return Redirect::route('teacher.index');
     }
 
     public function update(Request $request, $id) {
@@ -40,12 +40,12 @@ class TeacherController extends Controller
 
         $teacher = Teacher::where('school_id', Auth::user()->school_id)->findOrFail($id);
         $teacher->update($validated);
-        return Redirect::route('teachers.index');
+        return Redirect::route('teacher.index');
     }
     
     public function destroy($id) {
         $teacher = Teacher::where('school_id', Auth::user()->school_id)->findOrFail($id);
         $teacher->delete();
-        return Redirect::route('teachers.idex');
+        return Redirect::route('teacher.index');
     }
 }

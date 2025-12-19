@@ -73,21 +73,27 @@ const Teacher = () => {
         setIsEdit(false);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-        setData({ [e.target.name]: e.target.value });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setData(name as keyof Teacher, value);
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (isEdit && data.id) {
-            put(`/teachers/${data.id}`);
+            put(`/teachers/${data.id}`, {
+                onSuccess: () => handleClose(),
+            });
         } else {
-            post('/teachers');
+            post('/teachers', {
+                onSuccess: () => handleClose(),
+            });
         }
     };
 
     const handleDelete = (id: number) => {
         if (window.confirm('Are you sure you want to delete this teacher?')) {
-            destroy(`/teachers/${data.id}`);
+            destroy(`/teachers/${id}`);
         }
     };
 
@@ -106,7 +112,7 @@ const Teacher = () => {
                             <TableHead>Fist Name</TableHead>
                             <TableHead>Last Name</TableHead>
                             <TableHead>Subject</TableHead>
-                            <TableHead>Action</TableHead>
+                            <TableHead className="w-[100px]">Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -122,7 +128,7 @@ const Teacher = () => {
                                             {teacher.last_name}
                                         </TableCell>
                                         <TableCell>{teacher.subject}</TableCell>
-                                        <TableCell>
+                                        <TableCell className="flex gap-2">
                                             <Button
                                                 disabled={processing}
                                                 onClick={() =>
