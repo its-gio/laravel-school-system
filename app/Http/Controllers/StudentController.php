@@ -2,9 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentController extends Controller
 {
-    //
+    public function index() {
+        $schoolId = Auth::user()->school_id;
+        $students = Student::where('school_id', $schoolId)->get();
+        return Inertia::render('student/index', [
+            'school_id' => $schoolId,
+            'students' => $students
+        ]);
+    }
+
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'grade' => 'required|integer',
+        ]);
+
+        $validated["tenant_id"] = Auth::user()->school_id;
+        Student::create($validated);
+        return Redirect::route('student.index');
+    }
+
+    public function update(Request $request, $id) {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'grade' => 'required|integer',
+        ]);
+        $student = Student::where('school_id', Auth::user()->school_id)->findOrFail($id);
+        $student->update($validated);
+        return Redirect::route('student.index');
+    }
+    
+    public function destroy($id) {
+        $student = Student::where('tenant_id', Auth::user()->school_id)->findOrFail($id);
+        $student->delete();
+        return Redirect::route('student.index');
+    }
 }
