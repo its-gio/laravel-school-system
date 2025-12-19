@@ -7,7 +7,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Teacher } from '@/types';
-import { emptyForm } from './index';
+import { emptyForm } from '../../../pages/teacher/index';
 
 type TeacherFormProps = {
     setOpen: (value: boolean) => void;

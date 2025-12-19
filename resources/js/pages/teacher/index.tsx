@@ -1,3 +1,5 @@
+import TeacherForm from '@/components/pages/teacher/TeacherForm';
+import TeacherTable from '@/components/pages/teacher/TeacherTable';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Dialog } from '@/components/ui/dialog';
@@ -6,8 +8,6 @@ import { type BreadcrumbItem, type Teacher } from '@/types';
 import { PageProps } from '@inertiajs/core';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import TeacherForm from './TeacherForm';
-import TeacherTable from './TeacherTable';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
