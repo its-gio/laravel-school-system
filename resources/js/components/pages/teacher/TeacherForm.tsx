@@ -12,8 +12,6 @@ import { emptyForm } from '../../../pages/teacher/index';
 type TeacherFormProps = {
     setOpen: (value: boolean) => void;
     setData: (key: keyof Teacher | Partial<Teacher>, value?: string) => void;
-    setIsEdit: (value: boolean) => void;
-    isEdit: boolean;
     put: (url: string, options: { onSuccess: () => void }) => void;
     post: (url: string, options: { onSuccess: () => void }) => void;
     data: Teacher;
@@ -22,8 +20,6 @@ type TeacherFormProps = {
 const TeacherForm = ({
     setOpen,
     setData,
-    setIsEdit,
-    isEdit,
     put,
     post,
     data,
@@ -31,7 +27,6 @@ const TeacherForm = ({
     const handleClose = () => {
         setOpen(false);
         setData(emptyForm);
-        setIsEdit(false);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +36,7 @@ const TeacherForm = ({
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (isEdit && data.id) {
+        if (data.id) {
             put(`/teachers/${data.id}`, {
                 onSuccess: () => handleClose(),
             });
@@ -55,7 +50,7 @@ const TeacherForm = ({
         <DialogContent>
             <DialogHeader>
                 <DialogTitle>
-                    {isEdit ? 'Edit' : 'Add'} Teacher Form
+                    {data.id ? 'Edit' : 'Add'} Teacher Form
                 </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -105,7 +100,7 @@ const TeacherForm = ({
                         Cancel
                     </Button>
                     <Button type="submit" variant="outline">
-                        {isEdit ? 'Edit' : 'Add'}
+                        {data.id ? 'Edit' : 'Add'}
                     </Button>
                 </div>
             </form>

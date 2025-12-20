@@ -36,12 +36,10 @@ const Teacher = () => {
         processing,
     } = useForm<Teacher>();
     const [open, setOpen] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
 
     const handleOpenAdd = () => {
         setData(emptyForm);
         setOpen(true);
-        setIsEdit(false);
     };
 
     const handleOpenEdit = (teacher: Teacher) => {
@@ -49,7 +47,6 @@ const Teacher = () => {
             ...teacher,
         });
         setOpen(true);
-        setIsEdit(true);
     };
 
     const handleDelete = (id: number) => {
@@ -77,8 +74,6 @@ const Teacher = () => {
                 <TeacherForm
                     setOpen={setOpen}
                     setData={setData}
-                    setIsEdit={setIsEdit}
-                    isEdit={isEdit}
                     put={put}
                     post={post}
                     data={data}
