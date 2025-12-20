@@ -37,15 +37,8 @@ const Teacher = () => {
     } = useForm<Teacher>();
     const [open, setOpen] = useState(false);
 
-    const handleOpenAdd = () => {
-        setData(emptyForm);
-        setOpen(true);
-    };
-
-    const handleOpenEdit = (teacher: Teacher) => {
-        setData({
-            ...teacher,
-        });
+    const openForm = (teacher?: Teacher) => {
+        teacher?.id ? setData(teacher) : setData(emptyForm);
         setOpen(true);
     };
 
@@ -65,11 +58,11 @@ const Teacher = () => {
             <Card className="mt-6 p-6">
                 <div className="mb-4 flex items-center justify-between">
                     <h1 className="text-2xl font-bold">Teachers</h1>
-                    <Button onClick={handleOpenAdd}>Add Teacher</Button>
+                    <Button onClick={() => openForm()}>Add Teacher</Button>
                 </div>
                 <TeacherTable
                     teacherList={teacherList}
-                    handleOpenEdit={handleOpenEdit}
+                    openForm={openForm}
                     handleDelete={handleDelete}
                     processing={processing}
                 />

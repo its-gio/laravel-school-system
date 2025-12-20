@@ -12,14 +12,14 @@ import { Pencil, Trash2 } from 'lucide-react';
 
 type TeacherTableProps = {
     teacherList: Teacher[];
-    handleOpenEdit: (teacher: Teacher) => void;
+    openForm: (teacher: Teacher) => void;
     handleDelete: (id: number) => void;
     processing: boolean;
 };
 
 const TeacherTable = ({
     teacherList,
-    handleOpenEdit,
+    openForm,
     handleDelete,
     processing,
 }: TeacherTableProps) => {
@@ -46,7 +46,7 @@ const TeacherTable = ({
                                 <TableCell className="flex gap-2">
                                     <Button
                                         disabled={processing}
-                                        onClick={() => handleOpenEdit(teacher)}
+                                        onClick={() => openForm(teacher)}
                                         className="bg-orange-400 text-white hover:bg-orange-700"
                                     >
                                         <Pencil />
