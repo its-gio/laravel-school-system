@@ -50,7 +50,11 @@ const Teacher = () => {
     };
 
     const handleDelete = (id: number) => {
-        if (window.confirm('Are you sure you want to delete this teacher?')) {
+        if (
+            window.confirm(
+                `Are you sure you want to delete teacher: ${data.first_name} ${data.last_name}?`,
+            )
+        ) {
             destroy(`/teachers/${id}`);
         }
     };
