@@ -6,24 +6,24 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { emptyForm } from '@/pages/teacher/index';
-import { Teacher } from '@/types';
+import { emptyForm } from '@/pages/student/index';
+import { Student } from '@/types';
 
-type TeacherFormProps = {
+type StudentFormProps = {
     setOpen: (value: boolean) => void;
-    setData: (key: keyof Teacher | Partial<Teacher>, value?: string) => void;
+    setData: (key: keyof Student | Partial<Student>, value?: string) => void;
     put: (url: string, options: { onSuccess: () => void }) => void;
     post: (url: string, options: { onSuccess: () => void }) => void;
-    data: Teacher;
+    data: Student;
 };
 
-const TeacherForm = ({
+const StudentForm = ({
     setOpen,
     setData,
     put,
     post,
     data,
-}: TeacherFormProps) => {
+}: StudentFormProps) => {
     const handleClose = () => {
         setOpen(false);
         setData(emptyForm);
@@ -31,17 +31,17 @@ const TeacherForm = ({
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setData(name as keyof Teacher, value);
+        setData(name as keyof Student, value);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (data.id) {
-            put(`/teachers/${data.id}`, {
+            put(`/students/${data.id}`, {
                 onSuccess: () => handleClose(),
             });
         } else {
-            post('/teachers', {
+            post('/students', {
                 onSuccess: () => handleClose(),
             });
         }
@@ -50,7 +50,7 @@ const TeacherForm = ({
         <DialogContent>
             <DialogHeader>
                 <DialogTitle>
-                    {data.id ? 'Edit' : 'Add'} Teacher Form
+                    {data.id ? 'Edit' : 'Add'} Student Form
                 </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -80,12 +80,12 @@ const TeacherForm = ({
                     </div>
 
                     <div>
-                        <Label htmlFor="subject">Subject</Label>
+                        <Label htmlFor="grade">Grade</Label>
                         <Input
-                            id="subject"
-                            name="subject"
-                            placeholder="Subject"
-                            value={data.subject}
+                            id="grade"
+                            name="grade"
+                            placeholder="Grade"
+                            value={data.grade as number}
                             onChange={(e) => handleChange(e)}
                             required
                         />
@@ -108,4 +108,4 @@ const TeacherForm = ({
     );
 };
 
-export default TeacherForm;
+export default StudentForm;

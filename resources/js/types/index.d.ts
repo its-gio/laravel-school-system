@@ -49,3 +49,10 @@ export interface Teacher {
     last_name: string;
     subject: string;
 }
+export interface Student {
+    id: number;
+    school_id: number;
+    first_name: string;
+    last_name: string;
+    grade: number | null;
+}
